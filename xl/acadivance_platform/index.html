@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>college Portal | Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <span class="brand__logo" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>
+      </span>
+      <div>
+        <h1 class="brand__name">School Portal</h1>
+        <p class="brand__tag">Sign in to continue</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="split">
+    <!-- ================= STUDENT (top half) ================= -->
+    <section class="panel panel--student" aria-labelledby="student-title">
+      <div class="panel__intro">
+        <span class="panel__icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        </span>
+        <h2 id="student-title">Student Login</h2>
+        <p>Use your Student ID and password, or sign in instantly with face recognition.</p>
+      </div>
+
+      <div class="card">
+        <div class="tabs" role="tablist" aria-label="Student login method">
+          <button class="tab is-active" role="tab" id="tab-id" aria-controls="pane-id" aria-selected="true" type="button">Student ID</button>
+          <button class="tab" role="tab" id="tab-frs" aria-controls="pane-frs" aria-selected="false" tabindex="-1" type="button">Face Recognition (FRS)</button>
+        </div>
+
+        <!-- Option 1: Student ID + password -->
+        <div class="pane" id="pane-id" role="tabpanel" aria-labelledby="tab-id">
+          <form id="student-form" novalidate>
+            <div class="field">
+              <label for="student-id">Student ID</label>
+              <input id="student-id" name="studentId" type="text" autocomplete="username" placeholder="e.g. STU2026001" aria-describedby="student-id-err">
+              <p class="field__error" id="student-id-err" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="student-pass">Password</label>
+              <div class="password">
+                <input id="student-pass" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" aria-describedby="student-pass-err">
+                <button class="password__toggle" type="button" data-toggle="student-pass" aria-label="Show password">Show</button>
+              </div>
+              <p class="field__error" id="student-pass-err" role="alert"></p>
+            </div>
+            <div class="row">
+              <label class="check"><input type="checkbox" name="remember"> Remember me</label>
+              <a class="link" href="#">Forgot password?</a>
+            </div>
+            <div class="alert" role="status" aria-live="polite" hidden></div>
+            <button class="btn btn--primary" type="submit"><span class="btn__label">Log in as Student</span></button>
+          </form>
+        </div>
+
+        <!-- Option 2: FRS -->
+        <div class="pane" id="pane-frs" role="tabpanel" aria-labelledby="tab-frs" hidden>
+          <div class="frs">
+            <div class="frs__frame" id="frs-frame">
+              <video id="frs-video" autoplay playsinline muted></video>
+              <canvas id="frs-canvas" hidden></canvas>
+              <div class="frs__placeholder" id="frs-placeholder">
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="11" r="3"/><path d="M7 18c0-2.5 2.5-4 5-4s5 1.5 5 4"/></svg>
+              </div>
+              <div class="frs__guide" aria-hidden="true"></div>
+              <div class="frs__scanline" aria-hidden="true"></div>
+            </div>
+            <p class="frs__status" id="frs-status" role="status" aria-live="polite">Turn on your camera, then position your face inside the oval.</p>
+            <div class="frs__actions">
+              <button class="btn btn--primary" id="frs-main" type="button"><span class="btn__label">Start camera</span></button>
+              <button class="btn btn--ghost" id="frs-stop" type="button" hidden>Stop</button>
+            </div>
+            <p class="hint">Your camera is only used while you are scanning. <button class="link link--btn" type="button" id="frs-fallback">Use Student ID instead</button></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HORIZONTAL DIVIDER ================= -->
+    <div class="divider" role="separator" aria-orientation="horizontal"><span>Are you a teacher?</span></div>
+
+    <!-- ================= TEACHER (bottom half) ================= -->
+    <section class="panel panel--teacher" aria-labelledby="teacher-title">
+      <div class="panel__intro">
+        <span class="panel__icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
+        </span>
+        <h2 id="teacher-title">Teacher Login</h2>
+        <p>Access your classes, attendance and gradebook with your staff credentials.</p>
+      </div>
+
+      <div class="card">
+        <form id="teacher-form" novalidate>
+          <div class="field">
+            <label for="teacher-id">Teacher ID or Email</label>
+            <input id="teacher-id" name="teacherId" type="text" autocomplete="username" placeholder="e.g. TCH1042 or name@school.edu" aria-describedby="teacher-id-err">
+            <p class="field__error" id="teacher-id-err" role="alert"></p>
+          </div>
+          <div class="field">
+            <label for="teacher-pass">Password</label>
+            <div class="password">
+              <input id="teacher-pass" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" aria-describedby="teacher-pass-err">
+              <button class="password__toggle" type="button" data-toggle="teacher-pass" aria-label="Show password">Show</button>
+            </div>
+            <p class="field__error" id="teacher-pass-err" role="alert"></p>
+          </div>
+          <div class="row">
+            <label class="check"><input type="checkbox" name="remember"> Remember me</label>
+            <a class="link" href="#">Forgot password?</a>
+          </div>
+          <div class="alert" role="status" aria-live="polite" hidden></div>
+          <button class="btn btn--primary btn--teacher" type="submit"><span class="btn__label">Log in as Teacher</span></button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">Need help? Contact your school administrator.</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
